@@ -69,9 +69,9 @@ Open in new tab "Deploy to Azure":
     <img src="http://armviz.io/visualizebutton.png"/>
 </a><br/>
 
-
-Select existing **ocplinuxpolska** resource group <br/>
-Run below command in cloud shell and copy content (public key) to text editor. Remove CRLF(new line signs) <br/>
+On new tab : <br/>
+* Select existing **ocplinuxpolska** resource group <br/>
+* Run below command in **cloud shell**. Next copy content of (public key) command  to text editor and remove CRLF(new line signs). It is very important!!! <br/>
 cat ~/.ssh/id_rsa.pub <br/>
 <br/>
 Copy public key from text editor without CRLF to apropriate field in Template and veirfy below fields. <br/>
