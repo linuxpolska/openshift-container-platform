@@ -70,12 +70,12 @@ Open in new tab "Deploy to Azure":
 </a><br/>
 
 
-Select existing **ocplinuxpolska** resource group
+Select existing **ocplinuxpolska** resource group <br/>
 Run below command in cloud shell and copy content (public key) to text editor. Remove CRLF(new line signs) <br/>
-cat ~/.ssh/id_rsa.pub
-
-Copy public key from text editor without CRLF to apropriate field in Template and veirfy below fields.
-
+cat ~/.ssh/id_rsa.pub <br/>
+<br/>
+Copy public key from text editor without CRLF to apropriate field in Template and veirfy below fields. <br/>
+<br/>
 * openshift password: A!12345678
 * Rhsm username or org Id: askinstructor@linuxpolska.pl
 * Rhsm passowrd Or Activation Key: askInstructor:)
