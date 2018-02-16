@@ -205,6 +205,7 @@
 		},
 		"keyVaultResourceGroup": {
 			"type": "string",
+			"defaultValue": "kluczessh",
 			"minLength": 1,
 			"metadata": {
 				"description": "Resource Group that contains the Key Vault"
@@ -219,6 +220,7 @@
 		},
 		"keyVaultSecret": {
 			"type": "string",
+			"defaultValue": "uzytkownik",
 			"minLength": 1,
 			"metadata": {
 				"description": "Key Vault Secret Name that contains the Private Key"
@@ -236,12 +238,14 @@
 		},
 		"aadClientId": {
 			"type": "string",
+			"defaultValue": "deployment",
 			"metadata": {
 				"description": "Azure AD Client ID"
 			}
 		},
 		"aadClientSecret": {
 			"type": "securestring",
+			"defaultValue": "Welcome201802",
 			"minLength": 1,
 			"metadata": {
 				"description": "Azure AD Client Secret"
