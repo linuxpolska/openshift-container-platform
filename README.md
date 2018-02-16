@@ -75,7 +75,7 @@ On new tab : <br/>
 cat ~/.ssh/id_rsa.pub <br/>
 <br/>
 Copy public key from text editor without CRLF to apropriate field in template and veirfy below fields. <br/>
-<br/>
+
 * openshift password: A!12345678<br/>
 * Rhsm username or org Id: askinstructor@linuxpolska.pl<br/>
 * Rhsm passowrd Or Activation Key: askInstructor:)<br/>
@@ -86,7 +86,8 @@ Copy public key from text editor without CRLF to apropriate field in template an
 * Key Vault Secret: uzytkownik<br/>
 * Aad Client Id: deployment<br/>
 * Aad Client Secret: A!12345678 <br/> 
-<br/>
+
+
 # Full deployment with description
 
 ## READ the instructions in its entirety before deploying!
