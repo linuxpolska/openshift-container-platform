@@ -1,18 +1,5 @@
 # OpenShift Container Platform Deployment Template
 
-## NOTE: Structural change to Repo
-
-The master branch will now contain the most current release of OpenShift Container Platform with experimental items.  This may cause instability but will include new things or try new things.
-
-We will now have branches for the stable releases:
-- Release-3.6
-- Release-3.7
-- etc.
-
-Bookmark [aka.ms/OpenShift](http://aka.ms/OpenShift) for future reference.
-
-**For OpenShift Origin refer to https://github.com/Microsoft/openshift-origin**
-
 ## OpenShift Container Platform 3.7 with Username / Password authentication for OpenShift
 
 Currently, there is an issue when enabling the Azure Cloud Provider.  The cluster works fine with the exception that the Service Catalog does not display all templates.  The workaround at this time is to select from the openshift project to view all original templates.  We have a bugzilla bug open with Red Hat and will update the templates once the solution is available.
@@ -152,8 +139,8 @@ You will also need to get the Pool ID that contains your entitlements for OpenSh
 ## Deploy Template
 
 Deploy to Azure using Azure Portal: 
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FMicrosoft%2Fopenshift-container-platform%2Frelease-3.7%2Fazuredeploy.json" target="_blank"><img src="http://azuredeploy.net/deploybutton.png"/></a>
-<a href="http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2FMicrosoft%2Fopenshift-container-platform%2Frelease-3.7%2Fazuredeploy.json" target="_blank">
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Flinuxpolska%2Fopenshift-container-platform%2Frelease-3.7%2Fazuredeploy.json" target="_blank"><img src="http://azuredeploy.net/deploybutton.png"/></a>
+<a href="http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2Flinuxpolska%2Fopenshift-container-platform%2Frelease-3.7%2Fazuredeploy.json" target="_blank">
     <img src="http://armviz.io/visualizebutton.png"/>
 </a><br/>
 
@@ -224,6 +211,47 @@ To create additional (non-admin) users in your environment, login to your master
 If you enable Cockpit, then the password for 'root' is set to be the same as the password for the first OpenShift user.
 
 Use user 'root' and the same password as you assigned to your OpenShift admin to login to Cockpit ( use port 9090 instead of 8443 from Web Console ).
+
+### Quick deployment in few steps
+
+#### Cloud Shell
+
+* $ ssh-keygen -t rsa
+
+#### Azure CLI
+
+Import private ssh key to  KeyVault
+* $ az group create -n kluczessh -l eastus
+* $ az keyvault create -n linuxpolska**ID** -g kluczessh -l eastus --enabled-for-template-deployment true
+* $ az keyvault secret set --vault-name linuxpolska**ID** -n uzytkownik --file ~/.ssh/id_rsa
+
+Add and assign to ocplinuxpolska group "service principal"
+
+* $ az group create --name ocplinuxpolska --location eastus
+* $ az account list --output table
+* $ az ad sp create-for-rbac -n deployment -p Welcome201802 --role contributor --scopes /subscriptions/**twoje-unikalne-subscription-id**/resourceGroups/ocplinuxpolska
+* copy output to
+
+#### Template
+
+Select existing ocplinuxpolska resource group
+
+* $ cat ~/.ssh/id_rsa.pub
+* $ az ad sp list --output table | grep deployment
+
+
+
+* openshift password: Welcome201802
+* Rhsm username or org Id: username@linuxpolska.pl
+* Rhsm passowrd Or Activation Key: SecretPass
+* Rhsm Pool Id: 665446787ad667f8g0009jj
+* Ssh Public Key: ssh-rsa AAAA…..BBB
+* Key Vault Resource Group: kluczessh
+* Key Vault Name: linuxpolska**ID**
+* Key Vault Secret: uzytkownik
+* Aad Client Id: deployment
+* Aad Client Secret: Welcome201802
+
    
 ### Additional OpenShift Configuration Options
  
