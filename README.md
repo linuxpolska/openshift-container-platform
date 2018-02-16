@@ -53,7 +53,7 @@ Import private ssh key to  KeyVault
 * az keyvault create -n linuxpolska**ID** -g kluczessh -l eastus --enabled-for-template-deployment true
 * az keyvault secret set --vault-name linuxpolska**ID** -n uzytkownik --file ~/.ssh/id_rsa
 
-Add and assign to ocplinuxpolska group "service principal"
+Add "service principal" and assign to ocplinuxpolska groupp 
 
 * az group create --name ocplinuxpolska --location eastus
 * az account list --output table
@@ -62,7 +62,7 @@ Add and assign to ocplinuxpolska group "service principal"
 
 ### Template
 
-* Open in new tab "Deploy to Azure": 
+Open in new tab "Deploy to Azure": 
 <br/>
 <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Flinuxpolska%2FwarsztatyAzureOpenShift%2Frelease-3.7%2Fazuredeploy.json" target="_blank"><img src="http://azuredeploy.net/deploybutton.png"/></a>
 <a href="http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2Flinuxpolska%2FwarsztatyAzureOpenShift%2Frelease-3.7%2Fazuredeploy.json" target="_blank">
@@ -70,12 +70,11 @@ Add and assign to ocplinuxpolska group "service principal"
 </a><br/>
 
 
-
-* Select existing **ocplinuxpolska** resource group
-* run below command in cloud shell copy public key to text editor and remove CRLF(new line signs) <br/>
+Select existing **ocplinuxpolska** resource group
+Run below command in cloud shell and copy content (public key) to text editor. Remove CRLF(new line signs) <br/>
 cat ~/.ssh/id_rsa.pub
-* az ad sp list --output table | grep deployment
 
+Copy public key from text editor without CRLF to apropriate field in Template and veirfy below fields.
 
 * openshift password: A!12345678
 * Rhsm username or org Id: askinstructor@linuxpolska.pl
