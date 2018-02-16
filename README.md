@@ -1,5 +1,25 @@
 # OpenShift Container Platform Deployment Template
 
+## General prerequisites
+ 
+* HW: Hardware with enabled Intel VT-x or AMD-V technology
+* OS: Windows 7 /Windows 10 / Linux / MacOS **with admin/root permissions** 
+    * For Windows 7 users - use [Docker Toolbox for Windows 7](https://docs.docker.com/toolbox/toolbox_install_windows/)
+    * Alternative: [Deploy Docker on Ubuntu VM in Azure](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/CanonicalandMSOpenTech.DockerOnUbuntuServer1404LTS), detailed instructions [here](https://blogs.msdn.microsoft.com/opensourcemsft/2015/09/26/step-by-step-set-up-docker-on-azure-connect-to-nginx-container-from-windows/)
+* Docker on local OS: https://www.docker.com/community-edition#/download
+* Azure CLI 2.0: https://azure.github.io/projects/clis/
+* Optional: Visual Studio Code https://code.visualstudio.com + extensions:
+    * YAML https://marketplace.visualstudio.com/items?itemName=adamvoss.yaml
+    * Docker https://marketplace.visualstudio.com/items?itemName=PeterJausovec.vscode-docker
+    * Python https://marketplace.visualstudio.com/items?itemName=ms-python.python
+    * C# https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp
+    * Azure Resource Manager Tools https://marketplace.visualstudio.com/items?itemName=msazurermtools.azurerm-vscode-tools
+    * Visual Studio Team Services https://marketplace.visualstudio.com/items?itemName=ms-vsts.team
+    * Azure Account https://marketplace.visualstudio.com/items?itemName=ms-vscode.azure-account
+    * Azure CLI Tools https://marketplace.visualstudio.com/items?itemName=ms-vscode.azurecli
+    * NuGet Package Manager https://marketplace.visualstudio.com/items?itemName=jmrog.vscode-nuget-package-manager
+
+
 ## OpenShift Container Platform 3.7 with Username / Password authentication for OpenShift
 
 Currently, there is an issue when enabling the Azure Cloud Provider.  The cluster works fine with the exception that the Service Catalog does not display all templates.  The workaround at this time is to select from the openshift project to view all original templates.  We have a bugzilla bug open with Red Hat and will update the templates once the solution is available.
@@ -16,9 +36,57 @@ This template deploys OpenShift Container Platform with basic username / passwor
 |Storage Accounts <br />Managed Disks      |2 Storage Accounts for Diagnostics Logs <br />1 Storage Account for Private Docker Registry |
 |Network Security Groups|1 Network Security Group for Bastion VM<br />1 Network Security Group Master VMs<br />1 Network Security Group for Infra VMs<br />1 Network Security Group for Node VMs |
 |Availability Sets      |1 Availability Set for Master VMs<br />1 Availability Set for Infra VMs<br />1 Availability Set for Node VMs  |
-|Virtual Machines   	|1 Bastion Node - Used to Run Ansible Playbook for OpenShift deployment<br />3 or 5 Master Nodes<br />2 or 3 Infra Nodes<br />User-defined number of Nodes (1 to 30)<br />All VMs include a single attached data disk for Docker thin pool logical volume|
+|Virtual Machines   	|1 Bastion Node - Used to Run Ansible Playbook for OpenShift deployment<br />1, 3 or 5 Master Nodes<br />1, 2 or 3 Infra Nodes<br />User-defined number of Nodes (1 to 30)<br />All VMs include a single attached data disk for Docker thin pool logical volume|
 
 ![Cluster Diagram](images/openshiftdiagram.jpg)
+
+## Quick deployment in few steps
+
+### Cloud Shell
+
+* ssh-keygen -t rsa
+
+### Azure CLI
+
+Import private ssh key to  KeyVault
+* az group create -n kluczessh -l eastus
+* az keyvault create -n linuxpolska**ID** -g kluczessh -l eastus --enabled-for-template-deployment true
+* az keyvault secret set --vault-name linuxpolska**ID** -n uzytkownik --file ~/.ssh/id_rsa
+
+Add and assign to ocplinuxpolska group "service principal"
+
+* az group create --name ocplinuxpolska --location eastus
+* az account list --output table
+* az ad sp create-for-rbac -n deployment -p A!12345678 --role contributor --scopes /subscriptions/**twoje-unikalne-subscription-id**/resourceGroups/ocplinuxpolska
+
+
+### Template
+
+
+Select existing **ocplinuxpolska** resource group
+
+* $ cat ~/.ssh/id_rsa.pub
+* $ az ad sp list --output table | grep deployment
+
+
+* openshift password: A!12345678
+* Rhsm username or org Id: askinstructor@linuxpolska.pl
+* Rhsm passowrd Or Activation Key: askInstructor:)
+* Rhsm Pool Id: askInstructor:) 
+* Ssh Public Key: ssh-rsa AAAA…..BBB
+* Key Vault Resource Group: kluczessh
+* Key Vault Name: linuxpolska**ID**
+* Key Vault Secret: uzytkownik
+* Aad Client Id: deployment
+* Aad Client Secret: A!12345678 
+
+Deploy to Azure using Azure Portal: 
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Flinuxpolska%2FwarsztatyAzureOpenShift%2Frelease-3.7%2Fazuredeploy.json" target="_blank"><img src="http://azuredeploy.net/deploybutton.png"/></a>
+<a href="http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2Flinuxpolska%2FwarsztatyAzureOpenShift%2Frelease-3.7%2Fazuredeploy.json" target="_blank">
+    <img src="http://armviz.io/visualizebutton.png"/>
+</a><br/>
+
+
 
 ## READ the instructions in its entirety before deploying!
 
@@ -211,46 +279,6 @@ To create additional (non-admin) users in your environment, login to your master
 If you enable Cockpit, then the password for 'root' is set to be the same as the password for the first OpenShift user.
 
 Use user 'root' and the same password as you assigned to your OpenShift admin to login to Cockpit ( use port 9090 instead of 8443 from Web Console ).
-
-### Quick deployment in few steps
-
-#### Cloud Shell
-
-* $ ssh-keygen -t rsa
-
-#### Azure CLI
-
-Import private ssh key to  KeyVault
-* $ az group create -n kluczessh -l eastus
-* $ az keyvault create -n linuxpolska**ID** -g kluczessh -l eastus --enabled-for-template-deployment true
-* $ az keyvault secret set --vault-name linuxpolska**ID** -n uzytkownik --file ~/.ssh/id_rsa
-
-Add and assign to ocplinuxpolska group "service principal"
-
-* $ az group create --name ocplinuxpolska --location eastus
-* $ az account list --output table
-* $ az ad sp create-for-rbac -n deployment -p Welcome201802 --role contributor --scopes /subscriptions/**twoje-unikalne-subscription-id**/resourceGroups/ocplinuxpolska
-* copy output to
-
-#### Template
-
-Select existing ocplinuxpolska resource group
-
-* $ cat ~/.ssh/id_rsa.pub
-* $ az ad sp list --output table | grep deployment
-
-
-
-* openshift password: Welcome201802
-* Rhsm username or org Id: username@linuxpolska.pl
-* Rhsm passowrd Or Activation Key: SecretPass
-* Rhsm Pool Id: 665446787ad667f8g0009jj
-* Ssh Public Key: ssh-rsa AAAA…..BBB
-* Key Vault Resource Group: kluczessh
-* Key Vault Name: linuxpolska**ID**
-* Key Vault Secret: uzytkownik
-* Aad Client Id: deployment
-* Aad Client Secret: Welcome201802
 
    
 ### Additional OpenShift Configuration Options

@@ -141,6 +141,7 @@
 		},
 		"openshiftPassword": {
 			"type": "securestring",
+			"defaultValue": "A!12345678",
 			"minLength": 5,
 			"metadata": {
 				"description": "Password for OpenShift user to login to OpenShift Console"
@@ -245,7 +246,7 @@
 		},
 		"aadClientSecret": {
 			"type": "securestring",
-			"defaultValue": "Welcome201802",
+			"defaultValue": "A!12345678",
 			"minLength": 1,
 			"metadata": {
 				"description": "Azure AD Client Secret"
