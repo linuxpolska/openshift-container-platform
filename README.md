@@ -63,6 +63,7 @@ Add and assign to ocplinuxpolska group "service principal"
 ### Template
 
 * Open in new tab "Deploy to Azure": 
+<br/>
 <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Flinuxpolska%2FwarsztatyAzureOpenShift%2Frelease-3.7%2Fazuredeploy.json" target="_blank"><img src="http://azuredeploy.net/deploybutton.png"/></a>
 <a href="http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2Flinuxpolska%2FwarsztatyAzureOpenShift%2Frelease-3.7%2Fazuredeploy.json" target="_blank">
     <img src="http://armviz.io/visualizebutton.png"/>
@@ -71,8 +72,8 @@ Add and assign to ocplinuxpolska group "service principal"
 
 
 * Select existing **ocplinuxpolska** resource group
-* run below command in cloud shell copy public key to text editor and remove CRLF(new line signs)
-	 cat ~/.ssh/id_rsa.pub
+* run below command in cloud shell copy public key to text editor and remove CRLF(new line signs) <br/>
+cat ~/.ssh/id_rsa.pub
 * az ad sp list --output table | grep deployment
 
 
@@ -87,7 +88,7 @@ Add and assign to ocplinuxpolska group "service principal"
 * Aad Client Id: deployment
 * Aad Client Secret: A!12345678 
 
-#Full deployment with description
+# Full deployment with description
 
 ## READ the instructions in its entirety before deploying!
 
