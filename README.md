@@ -57,36 +57,37 @@ Add and assign to ocplinuxpolska group "service principal"
 
 * az group create --name ocplinuxpolska --location eastus
 * az account list --output table
-* az ad sp create-for-rbac -n deployment -p A!12345678 --role contributor --scopes /subscriptions/**twoje-unikalne-subscription-id**/resourceGroups/ocplinuxpolska
+* az ad sp create-for-rbac -n deployment -p 'A!12345678' --role contributor --scopes /subscriptions/**twoje-unikalne-subscription-id**/resourceGroups/ocplinuxpolska
 
 
 ### Template
 
-
-Select existing **ocplinuxpolska** resource group
-
-* $ cat ~/.ssh/id_rsa.pub
-* $ az ad sp list --output table | grep deployment
-
-
-* openshift password: A!12345678
-* Rhsm username or org Id: askinstructor@linuxpolska.pl
-* Rhsm passowrd Or Activation Key: askInstructor:)
-* Rhsm Pool Id: askInstructor:) 
-* Ssh Public Key: ssh-rsa AAAA…..BBB
-* Key Vault Resource Group: kluczessh
-* Key Vault Name: linuxpolska**ID**
-* Key Vault Secret: uzytkownik
-* Aad Client Id: deployment
-* Aad Client Secret: A!12345678 
-
-Deploy to Azure using Azure Portal: 
+* Open in new tab "Deploy to Azure": 
 <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Flinuxpolska%2FwarsztatyAzureOpenShift%2Frelease-3.7%2Fazuredeploy.json" target="_blank"><img src="http://azuredeploy.net/deploybutton.png"/></a>
 <a href="http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2Flinuxpolska%2FwarsztatyAzureOpenShift%2Frelease-3.7%2Fazuredeploy.json" target="_blank">
     <img src="http://armviz.io/visualizebutton.png"/>
 </a><br/>
 
 
+
+* Select existing **ocplinuxpolska** resource group
+* run below command in cloud shell copy public key to text editor and remove CRLF(new line signs)
+	 cat ~/.ssh/id_rsa.pub
+* az ad sp list --output table | grep deployment
+
+
+* openshift password: A!12345678
+* Rhsm username or org Id: askinstructor@linuxpolska.pl
+* Rhsm passowrd Or Activation Key: askInstructor:)
+* Rhsm Pool Id: askInstructor:) 
+* Ssh Public Key: ssh-rsa AAAA…..BB myaccount@secret.local <- paste here your public key without new lines B
+* Key Vault Resource Group: kluczessh
+* Key Vault Name: linuxpolska**ID**
+* Key Vault Secret: uzytkownik
+* Aad Client Id: deployment
+* Aad Client Secret: A!12345678 
+
+#Full deployment with description
 
 ## READ the instructions in its entirety before deploying!
 
