@@ -86,7 +86,7 @@ Copy public key from text editor without CRLF to apropriate field in template an
 * Key Vault Secret: uzytkownik<br/>
 * Aad Client Id: deployment<br/>
 * Aad Client Secret: A!12345678 <br/> 
-<br/>>
+<br/>
 # Full deployment with description
 
 ## READ the instructions in its entirety before deploying!
