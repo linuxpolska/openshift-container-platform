@@ -74,13 +74,13 @@ On new tab : <br/>
 * Run below command in **cloud shell**. Next copy content of (public key) command  to text editor and remove CRLF(new line signs). It is very important!!! <br/>
 cat ~/.ssh/id_rsa.pub <br/>
 <br/>
-Copy public key from text editor without CRLF to apropriate field in template and veirfy below fields. <br/>
+Verify below fields on opened template: <br/>
 
 * openshift password: A!12345678<br/>
 * Rhsm username or org Id: askinstructor@linuxpolska.pl<br/>
 * Rhsm passowrd Or Activation Key: askInstructor:)<br/>
 * Rhsm Pool Id: askInstructor:) <br/>
-* Ssh Public Key: ssh-rsa AAAA…..BB myaccount@secret.local <- paste here your public key without new lines  <br/>
+* Ssh Public Key: **ssh-rsa AAAA…..BB myaccount@secret.local** <- paste here your public key without new lines  <br/>
 * Key Vault Resource Group: kluczessh <br/>
 * Key Vault Name: linuxpolska**ID**<br/>
 * Key Vault Secret: uzytkownik<br/>
