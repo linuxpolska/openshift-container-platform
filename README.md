@@ -73,7 +73,7 @@ On new tab : <br/>
 * Select existing **ocplinuxpolska** resource group <br/>
 * Run below command in **cloud shell**. Next copy content of (public key) command  to text editor and remove CRLF(new line signs). It is very important!!! <br/>
 cat ~/.ssh/id_rsa.pub <br/>
-<br/>
+
 * Verify and fill in  below fields:
 	* openshift password: A!12345678<br/>
 	* Rhsm username or org Id: askinstructor@linuxpolska.pl<br/>
