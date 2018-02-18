@@ -74,18 +74,17 @@ On new tab : <br/>
 * Run below command in **cloud shell**. Next copy content of (public key) command  to text editor and remove CRLF(new line signs). It is very important!!! <br/>
 cat ~/.ssh/id_rsa.pub <br/>
 <br/>
-Verify below fields on opened template: <br/>
-
-* openshift password: A!12345678<br/>
-* Rhsm username or org Id: askinstructor@linuxpolska.pl<br/>
-* Rhsm passowrd Or Activation Key: askInstructor:)<br/>
-* Rhsm Pool Id: askInstructor:) <br/>
-* Ssh Public Key: **ssh-rsa AAAA…..BB myaccount@secret.local** <- paste here your public key without new lines  <br/>
-* Key Vault Resource Group: kluczessh <br/>
-* Key Vault Name: linuxpolska**ID**<br/>
-* Key Vault Secret: uzytkownik<br/>
-* Aad Client Id: deployment<br/>
-* Aad Client Secret: A!12345678 <br/> 
+* Verify and fill in  below fields:
+	* openshift password: A!12345678<br/>
+	* Rhsm username or org Id: askinstructor@linuxpolska.pl<br/>
+	* Rhsm passowrd Or Activation Key: askInstructor:)<br/>
+	* Rhsm Pool Id: askInstructor:) <br/>
+	* Ssh Public Key: **ssh-rsa AAAA…..BB myaccount@secret.local** <- paste here your public key without new lines  <br/>
+	* Key Vault Resource Group: kluczessh <br/>
+	* Key Vault Name: linuxpolska**ID**<br/>
+	* Key Vault Secret: uzytkownik<br/>
+	* Aad Client Id: deployment<br/>
+	* Aad Client Secret: A!12345678 <br/> 
 
 
 # Full deployment with description
