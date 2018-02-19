@@ -40,6 +40,14 @@ This template deploys OpenShift Container Platform with basic username / passwor
 
 ![Cluster Diagram](images/openshiftdiagram.jpg)
 
+### Create a new Azure Active Directory tenant
+
+https://account.azure.com/organization
+
+### Add Azure Pass
+
+https://www.microsoftazurepass.com
+
 ## Quick deployment in few steps
 
 ### Cloud Shell
