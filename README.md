@@ -1,7 +1,9 @@
 # OpenShift Container Platform Deployment Template
 
 ## General prerequisites
- 
+
+* Administrator rights
+* Open ports: 80, 443, 8443 
 * HW: Hardware with enabled Intel VT-x or AMD-V technology
 * OS: Windows 7 /Windows 10 / Linux / MacOS **with admin/root permissions** 
     * For Windows 7 users - use [Docker Toolbox for Windows 7](https://docs.docker.com/toolbox/toolbox_install_windows/)
